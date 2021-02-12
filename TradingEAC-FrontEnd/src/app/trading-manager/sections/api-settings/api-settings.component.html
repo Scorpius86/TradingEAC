@@ -1,0 +1,22 @@
+<mat-card class="mat-elevation-z8">
+    <mat-card-header>
+      <mat-card-title>Api Settings</mat-card-title>
+      <mat-card-subtitle>
+          <p>&nbsp;</p>
+      </mat-card-subtitle>
+    </mat-card-header>    
+    <mat-card-content>      
+        <div class="setting">
+            <mat-slide-toggle (change)="changeSetting({e:$event,service:'PriceService'})" color="primary" [(ngModel)]="isPriceServiceDotnet">Price Services with <span class="bold-text">{{isPriceServiceDotnet?'Dotnet':'Java'}}</span></mat-slide-toggle>
+        </div>
+        <div class="setting">
+            <mat-slide-toggle (change)="changeSetting({e:$event,service:'StockService'})" color="primary" [(ngModel)]="isStockServiceDotnet">Stock Services with <span class="bold-text">{{isStockServiceDotnet?'Dotnet':'Java'}}</span></mat-slide-toggle>
+        </div>
+        <div class="setting">
+            <mat-slide-toggle (change)="changeSetting({e:$event,service:'SecurityService'})" color="primary" [(ngModel)]="isSecurityServiceDotnet">Security Services with <span class="bold-text">{{isSecurityServiceDotnet?'Dotnet':'Java'}}</span></mat-slide-toggle>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>      
+    </mat-card-actions>
+  </mat-card>
+

@@ -1,0 +1,151 @@
+<mat-card class="mat-elevation-z8">
+    <mat-card-header>
+      <mat-card-title>Home</mat-card-title>
+      <mat-card-subtitle>
+          <p>&nbsp;</p>
+      </mat-card-subtitle>
+    </mat-card-header>    
+    <mat-card-content>      
+        <div>
+            <form class="example-form">
+                <mat-form-field class="example-full-width">
+                  <input type="text"
+                         placeholder="Symbol or description"
+                         aria-label="Number"
+                         matInput
+                         [formControl]="myControl"
+                         [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)='optionSelected($event)'>
+                      <table>
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option.symbol">
+                      <tr>
+                        <td class="w-75"><div class="w-75 fieldTable">{{option.symbol}}</div></td>
+                        <td class="w-275"><div class="w-275 fieldTable">{{option.description}}</div></td>
+                        <td class="w-55"><div class="w-55 fieldTable">{{option.currency}}</div></td>
+                        <td class="w-215"><div class="w-215 fieldTable">{{option.type}}</div></td>
+                      </tr>
+                    </mat-option>
+                        </table>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </form>
+        </div>
+        <div>
+        <div class="table-container">
+            <table mat-table [dataSource]="companyProfiles" matSort>
+                <ng-container matColumnDef="logo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-54 p-12"> Logo </th>
+                    <td mat-cell *matCellDef="let companyProfile" class="p-12"> 
+
+                        <img *ngIf="companyProfile.logo" src="{{companyProfile.logo}}" class="logo"/> 
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="country">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-55 p-12 t-a-c"> Country </th>
+                  <td mat-cell *matCellDef="let companyProfile" class="p-12 t-a-c"> {{companyProfile.country}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="currency">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-55 p-12 t-a-c"> Currency </th>
+                    <td mat-cell *matCellDef="let companyProfile" class="p-12 t-a-c"> {{companyProfile.currency}} </td>
+                </ng-container>
+                <ng-container matColumnDef="previousPrice">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-75 p-12"> Pre Price </th>
+                    <td mat-cell *matCellDef="let companyProfile" class="p-12 no-change t-a-r"> {{companyProfile.previousPrice}} </td>
+                </ng-container>
+                <ng-container matColumnDef="currentPrice">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-75 p-12"> Price </th>
+                    <td mat-cell *matCellDef="let companyProfile" 
+                        class="p-12 no-change t-a-r"
+                        [ngClass]="{
+                            'change-positive': companyProfile.currentPrice > companyProfile.previousPrice,
+                            'change-negative': companyProfile.currentPrice < companyProfile.previousPrice
+                        }"
+                        > {{companyProfile.currentPrice | number:'1.2-5'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="exchange">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-215 p-12"> Exchange </th>
+                    <td mat-cell *matCellDef="let companyProfile" class="p-12"> {{companyProfile.exchange}} </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="name">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-215 p-12"> Name </th>
+                      <td mat-cell *matCellDef="let companyProfile" class="p-12"> {{companyProfile.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="symbol">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-55 p-12"> Symbol </th>
+                    <td mat-cell *matCellDef="let companyProfile" class="p-12"> {{companyProfile.symbol}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ticker">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-55 p-12"> Ticker </th>
+                    <td mat-cell *matCellDef="let companyProfile" class="p-12"> {{companyProfile.ticker}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ipo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-100 p-12"> IPO </th>
+                    <td mat-cell *matCellDef="let companyProfile" class="p-12"> {{companyProfile.ipo}} </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="marketCapitalization">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-100 p-12"> Market Capitalization </th>
+                    <td mat-cell *matCellDef="let companyProfile" class="p-12"> {{companyProfile.marketCapitalization}} </td>
+                </ng-container>
+  
+                <ng-container matColumnDef="shareOutstanding">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-100 p-12"> Share Outstanding </th>
+                    <td mat-cell *matCellDef="let companyProfile" class="p-12"> {{companyProfile.shareOutstanding}} </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="phone">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-100 p-12"> Phone </th>
+                    <td mat-cell *matCellDef="let companyProfile" class="p-12 t-a-r"> {{companyProfile.phone}} </td>
+                </ng-container>
+      
+                <ng-container matColumnDef="weburl">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-100 p-12"> Web url </th>
+                    <td mat-cell *matCellDef="let companyProfile" class="p-12"> {{companyProfile.weburl}} </td>
+                </ng-container>
+      
+                <ng-container matColumnDef="finnhubIndustry">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-150 p-12"> Finn Hub Industry </th>
+                    <td mat-cell *matCellDef="let companyProfile" class="p-12"> {{companyProfile.finnhubIndustry}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-55 p-12">  </th>
+                    <td mat-cell *matCellDef="let companyProfile" class="p-12">                         
+                        <button mat-icon-button color="warn" (click)="deleteCompany(companyProfile)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                    </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <!--
+                <tr class="mat-row" *matNoDataRow>
+                    <td  *ngIf="!isLoading" class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+                -->
+              </table>  
+              
+                <div *ngIf="isLoading" class="table-loading">
+                    <mat-progress-spinner 
+                        color="primary" 
+                        mode="indeterminate">
+                    </mat-progress-spinner>
+                </div>
+            </div>
+            <mat-paginator 
+              [pageSize]="25"
+                [pageSizeOptions]="[5, 10,15, 25, 100]"></mat-paginator>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>      
+    </mat-card-actions>
+  </mat-card>
+

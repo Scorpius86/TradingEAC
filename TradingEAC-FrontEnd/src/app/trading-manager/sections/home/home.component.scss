@@ -1,0 +1,43 @@
+table {
+    width: max-content;
+    //min-width: auto;
+}
+
+.table-container{
+    overflow: auto;
+    height: 700px;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+.logo{
+    width: 30px;
+    height: 30px;
+}
+
+.example-form {
+    min-width: 150px;    
+    max-width: 695px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  .fieldTable{
+      overflow: hidden;
+  }
+.change-positive{
+  background-color: #7fb830 !important;
+  color: #ffffff !important;
+}
+.change-negative{
+  background-color: #ed5853 !important;
+  color: #ffffff !important;
+}
+.no-change{
+  background-color: #f1f1f1;
+  color: black;
+}
